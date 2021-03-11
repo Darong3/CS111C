@@ -1,0 +1,93 @@
+
+public class ArrayFrontBackCappedList<T> implements FrontBackCappedListInterface<T> {
+
+    private T [] list;
+    private int numberOfElements;
+
+    public ArrayFrontBackCappedList(int) {
+        // Code here
+    }
+
+    public boolean addFront(T) {
+        // Code here
+    }
+
+    public boolean addBack(T) {
+        // Code here
+    }
+
+    @Override
+    public boolean addFront(T newEntry) {
+        return false;
+    }
+
+    @Override
+    public boolean addBack(T newEntry) {
+        return false;
+    }
+
+    public T removeFront() {
+        // Code here
+    }
+
+    public T removeBack() {
+        // Code here
+    }
+
+    public boolean contains(T) {
+        // Code here
+    }
+
+    public int indexOf(T) {
+        // Code here
+    }
+
+    public int lastIndexOf(T) {
+        // Code here
+    }
+
+    public T getEntry(int) {
+        // Code here
+    }
+
+    public String toString() {
+        // Code here
+    }
+
+    public void clear() {
+        // Code here
+    }
+
+    @Override
+    public T getEntry(int givenPosition) {
+        return null;
+    }
+
+    @Override
+    public int indexOf(T anEntry) {
+        return 0;
+    }
+
+    @Override
+    public int lastIndexOf(T anEntry) {
+        return 0;
+    }
+
+    @Override
+    public boolean contains(T anEntry) {
+        return false;
+    }
+
+    public boolean isEmpty() {
+        // Code here
+    }
+
+    public boolean isFull() {
+        // Code here
+    }
+
+    public int size() {
+        // Code here
+    }
+
+}
