@@ -1,93 +1,177 @@
+public class ArrayFrontBackCappedList<T> implements FrontBackCappedListInterface<T>  {
 
-public class ArrayFrontBackCappedList<T> implements FrontBackCappedListInterface<T> {
-
-    private T [] list;
+    private T[] list;
     private int numberOfElements;
 
-    public ArrayFrontBackCappedList(int) {
-        // Code here
-    }
 
-    public boolean addFront(T) {
-        // Code here
-    }
-
-    public boolean addBack(T) {
-        // Code here
+    public ArrayFrontBackCappedList(int capacity){
+        this.list = (T[]) new Object[capacity];
+        this.numberOfElements = 0;
     }
 
     @Override
     public boolean addFront(T newEntry) {
-        return false;
+        if (isFull()) {
+            return false;
+        }
+        else {
+            for (int i = numberOfElements-1; i >= 0; i--) {
+                list[i+1] = list[i];
+            }
+            list[0] = newEntry;
+            numberOfElements++;
+            return true;
+        }
     }
 
     @Override
     public boolean addBack(T newEntry) {
-        return false;
+        if (isFull()) {
+            return false;
+        }
+        else {
+            list[numberOfElements] = newEntry;
+            numberOfElements++;
+            return true;
+        }
     }
 
+    @Override
     public T removeFront() {
-        // Code here
+        T removeItem = null;
+        if(!isEmpty()){
+            removeItem = list[0];
+            numberOfElements--;
+            for(int i = 0; i<numberOfElements; i++){
+                list[i] = list[i+1];
+            }
+        }
+        return removeItem;
     }
 
+    @Override
     public T removeBack() {
-        // Code here
+        T removeItem = null;
+
+        if(!isEmpty()){
+            removeItem = list[numberOfElements-1];
+            numberOfElements--;
+            for(int i = 0; i<numberOfElements; i++){
+                list[i] = list[i];
+            }
+        }
+        return removeItem;
     }
 
-    public boolean contains(T) {
-        // Code here
-    }
-
-    public int indexOf(T) {
-        // Code here
-    }
-
-    public int lastIndexOf(T) {
-        // Code here
-    }
-
-    public T getEntry(int) {
-        // Code here
-    }
-
-    public String toString() {
-        // Code here
-    }
-
+    @Override
     public void clear() {
-        // Code here
+        for(int i =0; i<numberOfElements ; i++){
+            list[i] = null;
+        }
+        numberOfElements = 0;
     }
 
     @Override
     public T getEntry(int givenPosition) {
-        return null;
+        if(givenPosition>=0 && givenPosition<=numberOfElements){
+            return list[givenPosition];
+        }
+        else{
+            return null;
+        }
     }
 
     @Override
     public int indexOf(T anEntry) {
-        return 0;
+        int index = 0;
+        if(!this.contains(anEntry)){
+            index = -1;
+        }
+        else{
+            while(index < numberOfElements){
+                if(list[index].equals(anEntry)){
+                    return index;
+                }
+                else{
+                    index++;
+                }
+            }
+        }
+        return index;
     }
+
 
     @Override
     public int lastIndexOf(T anEntry) {
-        return 0;
+        int lastIndex = numberOfElements-1;
+        if(!this.contains(anEntry)){
+            lastIndex = -1;
+        }
+        else{
+            while(lastIndex>=0){
+                if(list[lastIndex].equals(anEntry)){
+                    return lastIndex;
+                }
+                else{
+                    lastIndex--;
+                }
+            }
+        }
+        return lastIndex;
     }
+
+
 
     @Override
     public boolean contains(T anEntry) {
+        boolean found = false;
+        int index = 0;
+        while (!found && (index < numberOfElements)) {
+            if (anEntry.equals(list[index]))
+                found = true;
+            index++;
+        }
+        return found;
+    }
+
+    @Override
+    public int size() {
+        return numberOfElements;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        boolean result;
+        if(size() == 0){
+            result = true;
+        }
+        else {
+            result = false;
+        }
+        return result;
+    }
+
+    @Override
+    public boolean isFull() {
+        if (!isEmpty()) {
+            if (list.length == numberOfElements) {
+                return true;
+            }
+        }
         return false;
     }
 
-    public boolean isEmpty() {
-        // Code here
-    }
+    @Override
+    public String toString() {
+        T[] tempList = (T[]) new Object[numberOfElements];
+        if(!isEmpty()){
+            for (int i = 0; i < numberOfElements; i++) {
+                tempList[i] = list[i];
+            }
+        }
+        return "size=" + this.size() + ";" +
+                " capacity=" + this.list.length + "; " +
+                Arrays.toString(tempList);
 
-    public boolean isFull() {
-        // Code here
     }
-
-    public int size() {
-        // Code here
-    }
-
 }
